@@ -1,10 +1,21 @@
 import { headers } from 'next/headers';
 import Image from 'next/image';
 
+type Property = {
+  title: string;
+  image: string;
+  location: string;
+  type: string;
+  area: number;
+  price: number;
+  description: string;
+};
+
 export default async function DetailPropertiServer() {
   const headersList = headers();
-  const url = new URL(headersList.get('x-url') || '', 'http://localhost');
-  const id = url.searchParams.get('id');
+  const url = headersList.get('x-url') || '';
+  const urlObj = new URL(url, 'http://localhost');
+  const id = urlObj.searchParams.get('id');
 
   if (!id) {
     return <p style={{ padding: '2rem', color: 'red' }}>ID properti tidak ditemukan di URL</p>;
@@ -15,10 +26,10 @@ export default async function DetailPropertiServer() {
   });
 
   if (!res.ok) {
-    return <p style={{ padding: '2rem', color: 'red' }}>Gagal mengambil properti</p>;
+    return <p style={{ padding: '2rem', color: 'red' }}>Gagal mengambil detail properti</p>;
   }
 
-  const data = await res.json();
+  const data: Property = await res.json();
 
   return (
     <div style={{ padding: '2rem' }}>
