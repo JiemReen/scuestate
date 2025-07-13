@@ -13,7 +13,7 @@ import {
   Box,
   CardMedia,
 } from '@mui/material';
-import Grid from '@mui/material/Grid'; // ✅ Perbaikan penting: impor Grid langsung
+import Unstable_Grid2 from '@mui/material/Unstable_Grid2'; // ✅ Ganti Grid ke Unstable_Grid2
 
 export default function KelolaPropertiPage() {
   const { loggedIn, role } = useAuth();
@@ -91,9 +91,9 @@ export default function KelolaPropertiPage() {
 
       <SearchFilterBar onSearch={handleSearch} />
 
-      <Grid container spacing={2} sx={{ mt: 2 }}>
+      <Unstable_Grid2 container spacing={2} sx={{ mt: 2 }}>
         {filtered.map((item) => (
-          <Grid item xs={12} md={6} lg={4} key={item.id}>
+          <Unstable_Grid2 xs={12} md={6} lg={4} key={item.id}>
             <Card>
               <CardMedia
                 component="img"
@@ -124,9 +124,9 @@ export default function KelolaPropertiPage() {
                 </Box>
               </CardContent>
             </Card>
-          </Grid>
+          </Unstable_Grid2>
         ))}
-      </Grid>
+      </Unstable_Grid2>
     </Box>
   );
 }
