@@ -1,14 +1,21 @@
 import React from 'react';
 import Image from 'next/image';
 
-export default async function DetailProperti({ params }: { params: { id: string } }) {
-  const res = await fetch(`https://687134f07ca4d06b34b9b681.mockapi.io/properties/${params.id}`, {
+type Props = {
+  params: {
+    id: string;
+  };
+};
+
+export default async function DetailProperti(props: Props) {
+  const { id } = props.params;
+
+  const res = await fetch(`https://687134f07ca4d06b34b9b681.mockapi.io/properties/${id}`, {
     cache: 'no-store',
   });
 
-  console.log('Status:', res.status);
   if (!res.ok) {
-    console.error('Gagal mengambil properti dengan ID:', params.id);
+    console.error('Gagal mengambil properti dengan ID:', id);
     throw new Error('Gagal mengambil detail properti');
   }
 
@@ -26,7 +33,7 @@ export default async function DetailProperti({ params }: { params: { id: string 
     <div style={{ padding: '2rem' }}>
       <h1>{data.title}</h1>
       <Image
-        src={data.image}
+        src={data.image || 'https://via.placeholder.com/600x400?text=No+Image'}
         alt={data.title}
         width={600}
         height={400}
