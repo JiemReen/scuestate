@@ -1,3 +1,5 @@
+// app/detail/[id]/page.tsx
+
 import { notFound } from 'next/navigation';
 import { FaBed, FaBath, FaRulerCombined } from 'react-icons/fa';
 import {
@@ -9,14 +11,21 @@ import {
   Paper,
 } from '@mui/material';
 
+type Params = {
+  id: string;
+};
+
+// ✅ HARUS pakai nama fungsi: Page agar dikenali Next.js App Router
 export default async function Page({
   params,
 }: {
-  params: { id: string };
+  params: Params;
 }) {
   const res = await fetch(
-    `https://687134f07ca4d06b34b9b681.mockapi.io/properties/${params.id}`,
-    { cache: 'no-store' }
+    https://687134f07ca4d06b34b9b681.mockapi.io/properties/${params.id},
+    {
+      cache: 'no-store',
+    }
   );
 
   if (!res.ok) return notFound();
