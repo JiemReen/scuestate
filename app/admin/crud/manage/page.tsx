@@ -11,9 +11,9 @@ import {
   CardContent,
   Typography,
   Box,
-  Grid,
   CardMedia,
 } from '@mui/material';
+import Grid from '@mui/material/Grid'; // ✅ Perbaikan penting: impor Grid langsung
 
 export default function KelolaPropertiPage() {
   const { loggedIn, role } = useAuth();
@@ -104,7 +104,7 @@ export default function KelolaPropertiPage() {
               <CardContent>
                 <Typography variant="h6">{item.title}</Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {item.location} — {item.property} — Rp {item.price}
+                  {item.location} — {item.property} — Rp {item.price.toLocaleString('id-ID')}
                 </Typography>
                 <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
                   <Button
