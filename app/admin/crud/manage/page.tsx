@@ -13,7 +13,6 @@ import {
   Box,
   CardMedia,
 } from '@mui/material';
-import Unstable_Grid2 from '@mui/material/Unstable_Grid2'; // ✅ Ganti Grid ke Unstable_Grid2
 
 export default function KelolaPropertiPage() {
   const { loggedIn, role } = useAuth();
@@ -91,9 +90,23 @@ export default function KelolaPropertiPage() {
 
       <SearchFilterBar onSearch={handleSearch} />
 
-      <Unstable_Grid2 container spacing={2} sx={{ mt: 2 }}>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '16px',
+          marginTop: '16px',
+        }}
+      >
         {filtered.map((item) => (
-          <Unstable_Grid2 xs={12} md={6} lg={4} key={item.id}>
+          <div
+            key={item.id}
+            style={{
+              flex: '1 1 calc(33.333% - 16px)',
+              maxWidth: 'calc(33.333% - 16px)',
+              boxSizing: 'border-box',
+            }}
+          >
             <Card>
               <CardMedia
                 component="img"
@@ -104,7 +117,7 @@ export default function KelolaPropertiPage() {
               <CardContent>
                 <Typography variant="h6">{item.title}</Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {item.location} — {item.property} — Rp {item.price.toLocaleString('id-ID')}
+                  {item.location} — {item.property} — Rp {item.price}
                 </Typography>
                 <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
                   <Button
@@ -124,9 +137,9 @@ export default function KelolaPropertiPage() {
                 </Box>
               </CardContent>
             </Card>
-          </Unstable_Grid2>
+          </div>
         ))}
-      </Unstable_Grid2>
+      </div>
     </Box>
   );
 }
